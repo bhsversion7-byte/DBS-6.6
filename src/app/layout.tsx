@@ -1,60 +1,49 @@
-import { Footer } from "@/components/layout/footer";
-import { Header } from "@/components/layout/header";
 import { Providers } from "@/providers/providers";
+import { cn } from "@/lib/utils";
+import { Geist, Geist_Mono } from "next/font/google";
 import { type Metadata, type Viewport } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
-import Script from "next/script";
-
 import type React from "react";
 
-import { cn } from "@/lib/utils";
-
 import "@/app/globals.css";
-import { Geist, Geist_Mono } from "next/font/google";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://awesome-shadcn-ui.vercel.app"),
+  metadataBase: new URL("https://fx-treasury-demo.local"),
   title: {
-    default: "awesome-shadcn-ui",
-    template: `%s | awesome-shadcn-ui`,
+    default: "Bank-Grade FX Trading Platform",
+    template: "%s | Bank-Grade FX Trading Platform",
   },
-  description: "A curated list of awesome things related to shadcn/ui",
+  description:
+    "MVP demo for quote locking, FX trade execution, audit trails, risk controls, and real-time notifications.",
   keywords: [
-    "shadcn",
-    "ui library",
-    "awesome",
-    "github",
-    "readme",
-    "shad",
-    "awesome list",
-    "awesome shad",
-    "shadcn ui",
+    "foreign exchange",
+    "trading platform",
+    "quote engine",
+    "trade lifecycle",
+    "risk engine",
+    "audit trail",
   ],
-  alternates: {
-    canonical: "https://awesome-shadcn-ui.vercel.app/",
-  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://awesome-shadcn-ui.vercel.app/",
-    siteName: "awesome-shadcn-ui",
-    title: "awesome-shadcn-ui",
-    description: "A curated list of awesome things related to shadcn/ui",
+    url: "https://fx-treasury-demo.local/",
+    siteName: "Bank-Grade FX Trading Platform",
+    title: "Bank-Grade FX Trading Platform",
+    description:
+      "Interactive MVP demo for a bank-grade FX quote and trade workflow.",
     images: [
       {
         url: "/seo.png",
         width: 1200,
         height: 630,
-        alt: "awesome-shadcn-ui",
+        alt: "Bank-Grade FX Trading Platform",
       },
     ],
   },
   twitter: {
-    creator: "@birobirobiro",
-    site: "@birobirobiro",
     card: "summary_large_image",
-    title: "awesome-shadcn-ui",
-    description: "A curated list of awesome things related to shadcn/ui",
+    title: "Bank-Grade FX Trading Platform",
+    description:
+      "Interactive MVP demo for a bank-grade FX quote and trade workflow.",
     images: ["/seo.png"],
   },
   icons: {
@@ -68,6 +57,7 @@ export const viewport: Viewport = {
   maximumScale: 1,
   userScalable: false,
 };
+
 const geistSans = Geist({
   variable: "--font-sans",
   subsets: ["latin"],
@@ -92,20 +82,8 @@ export default function RootLayout({
           geistMono.variable,
         )}
       >
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
-        {process.env.HIMETRICA_API_KEY && (
-          <Script
-            src="https://cdn.himetrica.com/tracker.js"
-            data-api-key={process.env.HIMETRICA_API_KEY}
-            strategy="afterInteractive"
-          />
-        )}
         <Providers>
-          <div className="relative flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
+          <main className="min-h-screen">{children}</main>
         </Providers>
       </body>
     </html>
