@@ -1,0 +1,1107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bank-Grade FX Trading Platform</title>
+    <meta
+      name="description"
+      content="Partner-ready demo website for a bank-grade foreign exchange trading platform MVP."
+    />
+    <style>
+      :root {
+        --bg: #0b0f14;
+        --panel: #111820;
+        --panel-2: #17212b;
+        --ink: #ffffff;
+        --muted: #9ca3af;
+        --line: rgba(255, 255, 255, 0.11);
+        --red: #d32f2f;
+        --gold: #d4af37;
+        --green: #34d399;
+        --blue: #60a5fa;
+        --teal: #2dd4bf;
+        --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .container {
+        width: min(1180px, calc(100vw - 36px));
+        margin: 0 auto;
+      }
+
+      .top {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        border-bottom: 1px solid var(--line);
+        background: rgba(11, 15, 20, 0.9);
+        backdrop-filter: blur(16px);
+      }
+
+      .nav {
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 230px;
+      }
+
+      .brand-mark {
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background: var(--red);
+        box-shadow: var(--shadow);
+      }
+
+      .brand strong {
+        display: block;
+        font-size: 15px;
+      }
+
+      .brand small,
+      .muted {
+        color: var(--muted);
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      .nav-links a {
+        border: 1px solid transparent;
+        border-radius: 999px;
+        padding: 8px 11px;
+        text-decoration: none;
+        color: #d1d5db;
+        font-size: 13px;
+      }
+
+      .nav-links a:hover {
+        border-color: rgba(212, 175, 55, 0.45);
+        color: #fff;
+      }
+
+      .hero {
+        padding: 74px 0 32px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.95fr);
+        gap: 32px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(212, 175, 55, 0.35);
+        border-radius: 999px;
+        background: rgba(212, 175, 55, 0.1);
+        color: #f8e08e;
+        padding: 7px 11px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      h1 {
+        margin: 22px 0 14px;
+        font-size: clamp(36px, 5vw, 62px);
+        line-height: 1.02;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 680px;
+        color: #d1d5db;
+        font-size: 19px;
+        line-height: 1.65;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 0 16px;
+        background: var(--panel);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .button.primary {
+        border-color: var(--red);
+        background: var(--red);
+      }
+
+      .button.gold {
+        border-color: var(--gold);
+        background: var(--gold);
+        color: #070a0e;
+      }
+
+      .terminal {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: linear-gradient(180deg, #121a24, #0d131b);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .terminal-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--line);
+        padding: 14px 16px;
+      }
+
+      .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 5px 9px;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .badge.red {
+        border-color: rgba(211, 47, 47, 0.42);
+        background: rgba(211, 47, 47, 0.14);
+        color: #fca5a5;
+      }
+
+      .badge.gold {
+        border-color: rgba(212, 175, 55, 0.42);
+        background: rgba(212, 175, 55, 0.13);
+        color: #f8e08e;
+      }
+
+      .badge.green {
+        border-color: rgba(52, 211, 153, 0.35);
+        background: rgba(52, 211, 153, 0.12);
+        color: #bbf7d0;
+      }
+
+      .terminal-body {
+        padding: 18px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .pair-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+      }
+
+      .field {
+        display: grid;
+        gap: 7px;
+      }
+
+      label {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      select,
+      input {
+        width: 100%;
+        height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #080c11;
+        color: #fff;
+        padding: 0 12px;
+      }
+
+      .quote-card {
+        border: 1px solid rgba(212, 175, 55, 0.35);
+        border-radius: 10px;
+        background: rgba(212, 175, 55, 0.07);
+        padding: 14px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+
+      .mono {
+        font-family:
+          "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      }
+
+      .metric-value {
+        margin-top: 4px;
+        font-size: 21px;
+        font-weight: 900;
+      }
+
+      .gold-text {
+        color: var(--gold);
+      }
+
+      .green-text {
+        color: #86efac;
+      }
+
+      .red-text {
+        color: #fca5a5;
+      }
+
+      .quote-lock {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.22);
+        padding: 14px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .lock-top,
+      .lock-bottom {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .lock-bottom {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .progress {
+        height: 8px;
+        border-radius: 999px;
+        overflow: hidden;
+        background: #e5e7eb;
+      }
+
+      .progress > span {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: var(--gold);
+        transition: width 0.2s linear;
+      }
+
+      .section {
+        padding: 38px 0;
+      }
+
+      .section-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 24px;
+        margin-bottom: 18px;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(25px, 3vw, 36px);
+        letter-spacing: 0;
+      }
+
+      h3,
+      p {
+        margin: 0;
+      }
+
+      .section-title p {
+        max-width: 640px;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--panel);
+        padding: 18px;
+        min-width: 0;
+      }
+
+      .card h3 {
+        color: #fff;
+        font-size: 16px;
+        margin-bottom: 9px;
+      }
+
+      .card p,
+      .card li {
+        color: var(--muted);
+        line-height: 1.55;
+        font-size: 14px;
+      }
+
+      .stat {
+        font-size: 31px;
+        font-weight: 900;
+        margin: 8px 0 6px;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .three-col {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 10px;
+      }
+
+      .step {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--panel);
+        padding: 14px;
+        min-height: 118px;
+      }
+
+      .step.active {
+        border-color: var(--gold);
+        background: rgba(212, 175, 55, 0.1);
+      }
+
+      .step.done {
+        border-color: rgba(52, 211, 153, 0.35);
+        background: rgba(52, 211, 153, 0.1);
+      }
+
+      .step-num {
+        width: 28px;
+        height: 28px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--gold);
+        font-weight: 900;
+        margin-bottom: 12px;
+      }
+
+      .table-wrap {
+        overflow: auto;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 720px;
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 13px 14px;
+        text-align: left;
+        font-size: 14px;
+      }
+
+      th {
+        color: var(--muted);
+        background: rgba(0, 0, 0, 0.22);
+      }
+
+      .num {
+        text-align: right;
+      }
+
+      .log-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .log-row {
+        display: grid;
+        grid-template-columns: 90px 210px 1fr;
+        gap: 12px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 13px;
+        font-size: 14px;
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        align-items: stretch;
+      }
+
+      .flow-node {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--panel);
+        padding: 16px;
+        text-align: center;
+      }
+
+      .code {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #070a0e;
+        color: #d1d5db;
+        padding: 16px;
+        overflow: auto;
+        white-space: pre-wrap;
+        line-height: 1.55;
+        font-size: 13px;
+      }
+
+      .downloads {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .footer {
+        border-top: 1px solid var(--line);
+        padding: 26px 0 40px;
+        color: var(--muted);
+      }
+
+      @media (max-width: 1000px) {
+        .nav {
+          height: auto;
+          padding: 14px 0;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav-links {
+          justify-content: flex-start;
+        }
+
+        .hero-grid,
+        .two-col,
+        .three-col {
+          grid-template-columns: 1fr;
+        }
+
+        .cards {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .timeline,
+        .flow {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .container {
+          width: min(100vw - 24px, 1180px);
+        }
+
+        .cards,
+        .pair-grid,
+        .quote-card,
+        .lock-top,
+        .lock-bottom,
+        .timeline,
+        .flow {
+          grid-template-columns: 1fr;
+        }
+
+        .terminal-body {
+          padding: 14px;
+        }
+
+        .section-title {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .log-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <div class="container nav">
+        <a class="brand" href="#top" aria-label="FX Treasury home">
+          <span class="brand-mark">🏦</span>
+          <span>
+            <strong>FX Treasury Platform</strong>
+            <small>Bank-grade partner demo</small>
+          </span>
+        </a>
+        <nav class="nav-links" aria-label="Page sections">
+          <a href="#demo">Demo</a>
+          <a href="#product">Product</a>
+          <a href="#records">Records</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#deployment">Deployment</a>
+          <a href="#pitch">Pitch</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <span class="eyebrow">Executable quote locking + full trade lifecycle</span>
+            <h1>Bank-Grade Foreign Exchange Trading Platform</h1>
+            <p class="lead">
+              A partner-ready MVP website that demonstrates real-time FX rates, 30-second
+              executable quotes, idempotent trade submission, risk controls, audit logs,
+              notifications, database design, and deployment architecture.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#demo">Try the demo</a>
+              <a class="button" href="#architecture">View architecture</a>
+              <a class="button gold" href="assets/fx-trading-platform-pitch.pptx">Download pitch deck</a>
+            </div>
+          </div>
+
+          <section class="terminal" id="demo" aria-label="Interactive FX trading demo">
+            <div class="terminal-head">
+              <strong>USD → EUR Execution</strong>
+              <div class="badge-row">
+                <span class="badge red">Quote TTL 30s</span>
+                <span class="badge green">Risk ready</span>
+              </div>
+            </div>
+            <div class="terminal-body">
+              <div class="pair-grid">
+                <div class="field">
+                  <label for="sellCurrency">Sell</label>
+                  <select id="sellCurrency">
+                    <option>USD</option><option>EUR</option><option>GBP</option><option>JPY</option>
+                    <option>AUD</option><option>CAD</option><option>CHF</option><option>HKD</option>
+                    <option>SGD</option><option>CNY</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="buyCurrency">Buy</label>
+                  <select id="buyCurrency">
+                    <option>EUR</option><option>USD</option><option>GBP</option><option>JPY</option>
+                    <option>AUD</option><option>CAD</option><option>CHF</option><option>HKD</option>
+                    <option>SGD</option><option>CNY</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="amount">Amount</label>
+                  <input id="amount" value="10000" inputmode="decimal" />
+                </div>
+              </div>
+
+              <div class="quote-card">
+                <div>
+                  <small class="muted">Currency Pair</small>
+                  <div class="metric-value mono gold-text" id="pair">USD/EUR</div>
+                </div>
+                <div>
+                  <small class="muted">Live Bid / Ask</small>
+                  <div class="metric-value mono"><span id="bid">0.92322</span> / <span id="ask">0.92358</span></div>
+                </div>
+                <div>
+                  <small class="muted">Spread</small>
+                  <div class="metric-value mono green-text" id="spread">0.00037</div>
+                </div>
+              </div>
+
+              <div class="quote-lock">
+                <div class="lock-top">
+                  <div>
+                    <small class="muted">Executable Quote</small>
+                    <div class="metric-value mono" id="quoteId">No active quote</div>
+                  </div>
+                  <div>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+                      <small class="muted">TTL</small>
+                      <strong class="mono red-text" id="ttlText">NONE</strong>
+                    </div>
+                    <div class="progress"><span id="ttlBar"></span></div>
+                  </div>
+                </div>
+                <div class="lock-bottom">
+                  <div>
+                    <small class="muted">Sell Amount</small>
+                    <div class="metric-value mono" id="sellAmount">10,000.00 USD</div>
+                  </div>
+                  <div>
+                    <small class="muted">Target Amount</small>
+                    <div class="metric-value mono green-text" id="targetAmount">9,232.15 EUR</div>
+                  </div>
+                  <div style="display:grid;gap:10px">
+                    <button class="button primary" id="quoteBtn">Get Quote</button>
+                    <button class="button gold" id="tradeBtn" disabled>Submit Trade</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container cards">
+          <div class="card"><span class="muted">Live FX TPS</span><div class="stat">1,000</div><p>Target throughput for quote and trade traffic.</p></div>
+          <div class="card"><span class="muted">Concurrent Users</span><div class="stat">100K</div><p>Architecture target for horizontal scale.</p></div>
+          <div class="card"><span class="muted">Quote Hit Ratio</span><div class="stat">71.4%</div><p>Executable quote conversion signal.</p></div>
+          <div class="card"><span class="muted">Audit Events</span><div class="stat">8,914</div><p>Every trade transition is traceable.</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="product">
+        <div class="container">
+          <div class="section-title">
+            <div>
+              <span class="eyebrow">Product coverage</span>
+              <h2>All MVP sections in one partner-facing website</h2>
+            </div>
+            <p>
+              The site covers the full product scope from the build: dashboard,
+              quote search, trade execution, trade records, trade detail, user center,
+              risk, notifications, architecture, database, and deployment.
+            </p>
+          </div>
+          <div class="cards">
+            <div class="card"><h3>Dashboard</h3><p>Market overview, popular pairs, recent trades, notifications, charts, risk alerts.</p></div>
+            <div class="card"><h3>Quote Search</h3><p>Currency search, rate lookup, rate history, bid/ask spread, quote expiry countdown.</p></div>
+            <div class="card"><h3>Trade Execution</h3><p>Select pair, input amount, get quote, lock quote, submit trade, track status.</p></div>
+            <div class="card"><h3>User Center</h3><p>Customer profile, KYC status, trading limits, notification preferences, API keys.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-title">
+            <div>
+              <span class="eyebrow">State machine</span>
+              <h2>Quote-to-settlement lifecycle</h2>
+            </div>
+            <p>
+              The workflow demonstrates bank-grade control: quote TTL, duplicate prevention,
+              risk checks, valid transitions, settlement, audit logs, and real-time notifications.
+            </p>
+          </div>
+          <div class="timeline" id="timeline"></div>
+        </div>
+      </section>
+
+      <section class="section" id="records">
+        <div class="container two-col">
+          <div class="card">
+            <div class="section-title" style="margin-bottom:14px">
+              <div><h2>Trade Records</h2><p>Searchable history with pair, amount, locked rate, status, created and settlement time.</p></div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Trade ID</th><th>Pair</th><th class="num">Amount</th><th class="num">Rate</th><th>Status</th></tr>
+                </thead>
+                <tbody id="tradeRows"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="section-title" style="margin-bottom:14px">
+              <div><h2>Audit Log</h2><p>Immutable transition log with reason and timestamp.</p></div>
+            </div>
+            <div class="log-list" id="auditRows"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container three-col">
+          <div class="card">
+            <h3 class="gold-text">Trade Detail</h3>
+            <p>Trade summary, timeline, audit log, notification trace, risk score, settlement status.</p>
+            <div class="code" style="margin-top:12px">trade_id: TRD-20260606-1842
+pair: USD/EUR
+locked_rate: 0.92345
+status: SETTLED
+risk_score: 18</div>
+          </div>
+          <div class="card">
+            <h3 class="gold-text">Risk and Customer</h3>
+            <p>KYC verified, single trade limit 500,000 USD, AML and sanctions passed, daily utilization 41%.</p>
+            <div class="badge-row" style="margin-top:14px">
+              <span class="badge green">KYC Verified</span>
+              <span class="badge gold">Limit Ready</span>
+              <span class="badge green">AML Passed</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3 class="gold-text">Notifications</h3>
+            <p>Event bus to WebSocket to customer UI: trade created, confirmed, settled, failed, quote expired.</p>
+            <div class="code" style="margin-top:12px">WS /ws/fx-rates
+TRADE_CREATED
+TRADE_CONFIRMED
+TRADE_SETTLED</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <div class="container">
+          <div class="section-title">
+            <div>
+              <span class="eyebrow">Architecture</span>
+              <h2>Production-shaped full stack</h2>
+            </div>
+            <p>Next.js frontend, FastAPI API, domain services, Redis cache/event layer, PostgreSQL source of truth, and external FX provider integration path.</p>
+          </div>
+          <div class="flow">
+            <div class="flow-node"><strong>Customer UI</strong><p class="muted">Next.js + shadcn/ui</p></div>
+            <div class="flow-node"><strong>API Gateway</strong><p class="muted">JWT + validation</p></div>
+            <div class="flow-node"><strong>Domain Services</strong><p class="muted">FX, Quote, Trade, Risk</p></div>
+            <div class="flow-node"><strong>Data Layer</strong><p class="muted">PostgreSQL + Redis</p></div>
+            <div class="flow-node"><strong>Provider</strong><p class="muted">Bloomberg / Refinitiv path</p></div>
+          </div>
+          <div class="cards" style="margin-top:16px">
+            <div class="card"><h3>REST API</h3><p class="mono">GET /currencies<br />GET /fx-rates<br />POST /quotes<br />POST /trades</p></div>
+            <div class="card"><h3>State and Risk</h3><p>Quote expiry, unsupported currency, duplicate submission, user limit, AML, sanctions, velocity.</p></div>
+            <div class="card"><h3>Database</h3><p>currencies, fx_rates, quotes, trades, trade_status_logs, notifications.</p></div>
+            <div class="card"><h3>Precision</h3><p>Application uses Decimal. PostgreSQL stores NUMERIC(20,8). No float for money.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="deployment">
+        <div class="container">
+          <div class="section-title">
+            <div>
+              <span class="eyebrow">Deployment package</span>
+              <h2>What is included in the repository</h2>
+            </div>
+            <p>This GitHub Pages website is the shareable front door. The repository also contains the full local implementation and pitch assets.</p>
+          </div>
+          <div class="two-col">
+            <div class="card">
+              <h3>File map</h3>
+              <div class="code">src/components/fx-trading-platform.tsx
+  Main Next.js demo workspace
+
+backend/app/main.py
+  FastAPI routes and WebSocket endpoint
+
+backend/app/services.py
+  Quote TTL, risk checks, idempotency, state machine
+
+database/schema.sql + database/seed.sql
+  PostgreSQL schema and seed data
+
+docker-compose.yml
+  web + api + postgres + redis</div>
+            </div>
+            <div class="card">
+              <h3>Runbook</h3>
+              <div class="code">Frontend
+  pnpm install
+  pnpm dev
+
+Backend
+  cd backend
+  pip install -r requirements.txt
+  uvicorn app.main:app --reload
+
+Full stack
+  docker compose up --build</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="pitch">
+        <div class="container card">
+          <div class="section-title">
+            <div>
+              <span class="eyebrow">Partner handoff</span>
+              <h2>Pitch deck and speaker notes</h2>
+            </div>
+            <p>The deck is structured for four presenters: product story, frontend demo, backend/data, and DevOps/roadmap.</p>
+          </div>
+          <div class="downloads">
+            <a class="button gold" href="assets/fx-trading-platform-pitch.pptx">Download PPTX</a>
+            <a class="button" href="assets/speaker-notes.md">Open speaker notes</a>
+            <a class="button primary" href="https://github.com/bhsversion7-byte/DBS-6.6">Open GitHub repo</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        Bank-Grade FX Trading Platform MVP · Quote locking · Risk controls · Auditability · Deployment-ready backbone
+      </div>
+    </footer>
+
+    <script>
+      const rates = {
+        "USD/EUR": 0.9234,
+        "EUR/USD": 1.0829,
+        "GBP/USD": 1.2708,
+        "USD/JPY": 156.42,
+        "USD/CNY": 7.2428,
+        "USD/HKD": 7.8121,
+        "AUD/USD": 0.6638,
+        "USD/CHF": 0.8964,
+      };
+
+      const statuses = [
+        "CREATED",
+        "QUOTE_LOCKED",
+        "PENDING_RISK_CHECK",
+        "CONFIRMED",
+        "SETTLEMENT_PENDING",
+        "SETTLED",
+      ];
+
+      const statusLabels = {
+        CREATED: "Trade created",
+        QUOTE_LOCKED: "Quote locked",
+        PENDING_RISK_CHECK: "Risk check",
+        CONFIRMED: "Confirmed",
+        SETTLEMENT_PENDING: "Settlement",
+        SETTLED: "Settled",
+      };
+
+      const state = {
+        tick: 0,
+        quote: null,
+        activeIndex: -1,
+        ttlTimer: null,
+        trades: [
+          ["TRD-20260606-1842", "USD/EUR", 250000, 0.92345, "SETTLED"],
+          ["TRD-20260606-1837", "USD/CNY", 80000, 7.2428, "CONFIRMED"],
+          ["TRD-20260606-1829", "GBP/USD", 12000, 1.2708, "SETTLED"],
+        ],
+        audit: [
+          ["09:15:04", "CREATED -> QUOTE_LOCKED", "Quote TTL accepted, quote_id=QTE-20260606-7712"],
+          ["09:15:16", "PENDING_RISK_CHECK -> CONFIRMED", "Risk score 18, AML and sanctions checks passed"],
+          ["09:16:36", "SETTLEMENT_PENDING -> SETTLED", "Ledger settlement completed and customer notified"],
+        ],
+      };
+
+      const $ = (id) => document.getElementById(id);
+      const money = (value) => Number(value || 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const fmtRate = (value) => Number(value || 0).toFixed(value > 10 ? 4 : 5);
+      const now = () => new Date().toLocaleTimeString("en-US", { hour12: false });
+      const makeId = (prefix) => `${prefix}-${new Date().toISOString().slice(0, 10).replaceAll("-", "")}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+      function pair() {
+        return `${$("sellCurrency").value}/${$("buyCurrency").value}`;
+      }
+
+      function baseRate() {
+        const direct = rates[pair()];
+        const inversePair = `${$("buyCurrency").value}/${$("sellCurrency").value}`;
+        return direct || 1 / (rates[inversePair] || 1);
+      }
+
+      function bidAsk() {
+        const base = baseRate();
+        const live = base + Math.sin(state.tick / 3) * base * 0.0015;
+        return { bid: live * 0.9998, ask: live * 1.0002 };
+      }
+
+      function renderRates() {
+        state.tick += 1;
+        const { bid, ask } = bidAsk();
+        const amount = Number($("amount").value || 0);
+        $("pair").textContent = pair();
+        $("bid").textContent = fmtRate(bid);
+        $("ask").textContent = fmtRate(ask);
+        $("spread").textContent = fmtRate(ask - bid);
+        $("sellAmount").textContent = `${money(amount)} ${$("sellCurrency").value}`;
+        $("targetAmount").textContent = `${money(amount * bid)} ${$("buyCurrency").value}`;
+      }
+
+      function renderTimeline() {
+        $("timeline").innerHTML = statuses.map((status, index) => {
+          const cls = index === state.activeIndex ? "step active" : index < state.activeIndex ? "step done" : "step";
+          return `<div class="${cls}"><div class="step-num">${index <= state.activeIndex ? "✓" : index + 1}</div><h3>${statusLabels[status]}</h3><p class="mono muted" style="margin-top:8px;font-size:12px">${status}</p></div>`;
+        }).join("");
+      }
+
+      function renderTrades() {
+        $("tradeRows").innerHTML = state.trades.map(([id, pairValue, amount, lockedRate, status]) => {
+          const badgeClass = status === "SETTLED" ? "green" : "gold";
+          return `<tr><td class="mono">${id}</td><td class="mono">${pairValue}</td><td class="num mono">${money(amount)}</td><td class="num mono">${fmtRate(lockedRate)}</td><td><span class="badge ${badgeClass}">${status}</span></td></tr>`;
+        }).join("");
+      }
+
+      function renderAudit() {
+        $("auditRows").innerHTML = state.audit.map(([time, transition, reason]) => (
+          `<div class="log-row"><span class="mono muted">${time}</span><span class="mono gold-text">${transition}</span><span>${reason}</span></div>`
+        )).join("");
+      }
+
+      function renderAll() {
+        renderTimeline();
+        renderTrades();
+        renderAudit();
+      }
+
+      function createQuote() {
+        const amount = Number($("amount").value || 0);
+        if ($("sellCurrency").value === $("buyCurrency").value || amount <= 0) {
+          alert("Choose two different currencies and enter a positive amount.");
+          return;
+        }
+        const { bid } = bidAsk();
+        state.quote = {
+          id: makeId("QTE"),
+          pair: pair(),
+          amount,
+          rate: bid,
+          expiresAt: Date.now() + 30000,
+          status: "ACTIVE",
+        };
+        state.activeIndex = 1;
+        $("quoteId").textContent = `${state.quote.id} | ${fmtRate(bid)}`;
+        $("tradeBtn").disabled = false;
+        state.audit.unshift([now(), "NONE -> ACTIVE", `Quote generated from live bid rate ${fmtRate(bid)} with 30s TTL`]);
+        clearInterval(state.ttlTimer);
+        state.ttlTimer = setInterval(updateTtl, 250);
+        updateTtl();
+        renderAll();
+      }
+
+      function updateTtl() {
+        if (!state.quote || state.quote.status !== "ACTIVE") return;
+        const remaining = Math.max(0, Math.ceil((state.quote.expiresAt - Date.now()) / 1000));
+        $("ttlText").textContent = `${remaining}s`;
+        $("ttlText").className = remaining <= 8 ? "mono red-text" : "mono gold-text";
+        $("ttlBar").style.width = `${(remaining / 30) * 100}%`;
+        if (remaining === 0) {
+          state.quote.status = "EXPIRED";
+          $("ttlText").textContent = "EXPIRED";
+          $("tradeBtn").disabled = true;
+          state.audit.unshift([now(), "ACTIVE -> EXPIRED", "Quote TTL reached zero; trade submission is blocked"]);
+          clearInterval(state.ttlTimer);
+          renderAll();
+        }
+      }
+
+      function submitTrade() {
+        if (!state.quote || state.quote.status !== "ACTIVE") {
+          alert("No active quote. Request a new quote before submitting.");
+          return;
+        }
+        const tradeId = makeId("TRD");
+        const trade = [tradeId, state.quote.pair, state.quote.amount, state.quote.rate, "CREATED"];
+        state.trades.unshift(trade);
+        state.quote.status = "USED";
+        $("tradeBtn").disabled = true;
+        $("ttlText").textContent = "USED";
+        clearInterval(state.ttlTimer);
+        state.activeIndex = 0;
+        state.audit.unshift([now(), "ACTIVE -> USED", `Idempotency-Key accepted; quote ${state.quote.id} attached to ${tradeId}`]);
+        renderAll();
+
+        [
+          ["QUOTE_LOCKED", "Quote ownership verified and rate locked", 650],
+          ["PENDING_RISK_CHECK", "Risk engine evaluating limit, AML, sanctions, velocity", 1400],
+          ["CONFIRMED", "Risk score passed policy threshold", 2400],
+          ["SETTLEMENT_PENDING", "Settlement instruction sent to ledger adapter", 3400],
+          ["SETTLED", "Settlement completed and notification emitted", 4600],
+        ].forEach(([status, reason, delay]) => {
+          setTimeout(() => {
+            state.activeIndex = statuses.indexOf(status);
+            trade[4] = status;
+            const previous = statuses[Math.max(0, state.activeIndex - 1)];
+            state.audit.unshift([now(), `${previous} -> ${status}`, reason]);
+            renderAll();
+          }, delay);
+        });
+      }
+
+      $("quoteBtn").addEventListener("click", createQuote);
+      $("tradeBtn").addEventListener("click", submitTrade);
+      ["sellCurrency", "buyCurrency", "amount"].forEach((id) => $(id).addEventListener("input", renderRates));
+
+      renderRates();
+      renderAll();
+      setInterval(renderRates, 1400);
+    </script>
+  </body>
+</html>
