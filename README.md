@@ -42,6 +42,12 @@ Use this command for the main demo website:
 pnpm dev:9000
 ```
 
+If `pnpm` is not available but dependencies are already installed, use the direct Next.js command:
+
+```bash
+node node_modules/next/dist/bin/next dev --turbo -p 9000
+```
+
 Open:
 
 ```text
